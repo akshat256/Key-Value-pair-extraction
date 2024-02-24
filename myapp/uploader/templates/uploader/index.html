@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+    <script>
+        function checkFileType() {
+            const fileInput = document.querySelector('input[type="file"]');
+            const fileType = fileInput.files[0].type;
+            if (!fileType.startsWith('image') && fileType !== 'application/pdf') {
+                alert('Unsupported file type. Please upload an image or PDF file.');
+            }
+        }
+    </script>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    form {
+        margin-top: 20px;
+    }
+    input[type="file"] {
+        padding: 10px;
+    }
+    input[type="submit"], button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    </style>
+    
+</head>
+<body>
+    <h1>Upload pdf/image file</h1>
+    <form action="{% url 'index' %}" method="post" enctype="multipart/form-data" onsubmit="checkFileType()">
+        {% csrf_token %}
+        <input type="file" name="file">
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
