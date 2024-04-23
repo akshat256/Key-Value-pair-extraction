@@ -1,51 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Upload File</title>
-    <script>
-        function checkFileType() {
-            const fileInput = document.querySelector('input[type="file"]');
-            const fileType = fileInput.files[0].type;
-            if (!fileType.startsWith('image') && fileType !== 'application/pdf') {
-                alert('Unsupported file type. Please upload an image or PDF file.');
-            }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Upload</title>
+<script>
+    function checkFileType() {
+        const fileInput = document.querySelector('input[type="file"]');
+        const fileType = fileInput.files[0].type;
+        if (!fileType.startsWith('image') && fileType !== 'application/pdf') {
+            alert('Unsupported file type. Please upload an image or PDF file.');
         }
-    </script>
-    <style>
+    }
+</script>
+<style>
     body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
     }
-    h1 {
-        color: #333;
-    }
-    form {
-        margin-top: 20px;
-    }
-    input[type="file"] {
-        padding: 10px;
-    }
-    input[type="submit"], button {
-        padding: 10px 20px;
-        background-color: #007bff;
+
+    header {
+        background-color: #333;
         color: white;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="file"] {
+        margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
-    button:hover {
-        background-color: #0056b3;
+
+    input[type="submit"]:hover {
+        background-color: #555;
     }
-    </style>
-    
+</style>
 </head>
 <body>
-    <h1>Upload pdf/image file</h1>
-    <form action="{% url 'index' %}" method="post" enctype="multipart/form-data" onsubmit="checkFileType()">
-        {% csrf_token %}
-        <input type="file" name="file">
-        <br>
-        <button type="submit">Upload</button>
-    </form>
+    <header>
+        <h1>Document Upload</h1>
+    </header>
+    <div class="container">
+        <form action="{% url 'index' %}" method="post" enctype="multipart/form-data" onsubmit="checkFileType()">
+            {% csrf_token %}
+            <input type="file" name="file">
+            <br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+    
 </body>
 </html>
