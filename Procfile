@@ -1,1 +1,1 @@
-web: gunicorn mypp.wsgi --log-file -
+web: gunicorn mypp.wsgi 
